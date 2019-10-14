@@ -3,18 +3,19 @@ import axios from "axios";
 
 const Search = () => {
 
+    let BOOK_URL = `https://www.googleapis.com/books/v1/volumes`;
+
     const [searchTerm, setSearchTerm] = useState("");
     const [books, setBooks] = useState({
         items: []
     });
+
     const onInputChangeTerm = e => {
         setSearchTerm(e.target.value);
     };
 
-    let API_URL = `https://www.googleapis.com/books/v1/volumes`;
-
     const checkBooks = async () => {
-        const result = await axios.get(`${API_URL}?q=${searchTerm}`);
+        const result = await axios.get(`${BOOK_URL}?q=${searchTerm}`);
         setBooks(result.data);
     };
 
@@ -39,7 +40,7 @@ const Search = () => {
         <section>
             <form onSubmit={onSubmitHandler}>
                 <label>
-                    <span>Search for books</span>
+                    <span>Type here </span>
                     <input
                         type="search"
                         placeholder="Enter title, author or publish date"

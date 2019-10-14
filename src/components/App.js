@@ -11,7 +11,7 @@ function App() {
 				<p>Find a wanted book,author or published date on
 					<a href='https://books.google.pl/'> google books</a>
 				</p>
-					<p>Press "Search" button to see search result</p>
+					<p>Press "Search" button or "ENTER" to see search result</p>
 				<Search/>
 		</section>
 	);

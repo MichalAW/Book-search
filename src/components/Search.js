@@ -1,39 +1,39 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
-const [searchTerm, setSearchTerm] = useState("");
-const [books, setBooks] = useState({
-    items: []
-});
-const onInputChange = e => {
-    setSearchTerm(e.target.value);
-};
+const Search = () => {
 
-let API_URL = `https://www.googleapis.com/books/v1/volumes`;
+    const [searchTerm, setSearchTerm] = useState("");
+    const [books, setBooks] = useState({
+        items: []
+    });
+    const onInputChangeTerm = e => {
+        setSearchTerm(e.target.value);
+    };
 
-const fetchBooks = async () => {
-    const result = await axios.get(`${API_URL}?q=${searchTerm}`);
-    setBooks(result.data);
-};
+    let API_URL = `https://www.googleapis.com/books/v1/volumes`;
 
-const onSubmitHandler = e => {
-    e.preventDefault();
-    fetchBooks();
-};
+    const checkBooks = async () => {
+        const result = await axios.get(`${API_URL}?q=${searchTerm}`);
+        setBooks(result.data);
+    };
 
-const bookAuthors = authors => {
-    if (authors.length <= 2) {
-        authors = authors.join(" and ");
-    } else if (authors.length > 2) {
-        let lastAuthor = " and " + authors.slice(-1);
-        authors.pop();
-        authors = authors.join(", ");
-        authors += lastAuthor;
-    }
-    return authors;
-};
+    const onSubmitHandler = e => {
+        e.preventDefault();
+        checkBooks();
+    };
 
-function Search() {
+    const bookAuthors = authors => {
+        if (authors.length <= 2) {
+            authors = authors.join(" and ");
+        } else if (authors.length > 2) {
+            let lastAuthor = " and " + authors.slice(-1);
+            authors.pop();
+            authors = authors.join(", ");
+            authors += lastAuthor;
+        }
+        return authors;
+    };
 
     return (
         <section>
@@ -44,7 +44,7 @@ function Search() {
                         type="search"
                         placeholder="Enter title, author or publish date"
                         value={searchTerm}
-                        onChange={onInputChange}
+                        onChange={onInputChangeTerm}
                     />
                     <button type="submit">Search</button>
                 </label>
